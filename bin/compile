@@ -18,33 +18,33 @@ export_env_dir $3
 
 # START CONFIG
 
-# Support end-user configured NGINX_VERSION, PHP_VERSION, WORDPRESS_VERSION,
-# S3_BUCKET environment variables. This way, end-users
+# Support end-user configured NGINX_VERSION, PHP_VERSION, WORDPRESS_VERSION and
+# DOWNLOAD_FROM environment variables. This way, end-users
 # can choose exactly which versions to run with. Requires user-env-compile for now,
 # but will continue to work when Heroku deprecates user-env-compile and ENV_DIR
 # appears to this script as a parameter.
 
 if [ -z "$NGINX_VERSION" ]; then
-  NGINX_VERSION=1.4.2
+  NGINX_VERSION=1.7.3
 fi
 
 if [ -z "$PHP_VERSION" ]; then
-  PHP_VERSION=5.5.2
+  PHP_VERSION=5.5.14
 fi
 
 if [ -z "$WORDPRESS_VERSION" ]; then
   WORDPRESS_VERSION=3.9.1
 fi
 
-if [ -z "$S3_BUCKET" ]; then
-  S3_BUCKET=heroku-buildpack-wordpress
+if [ -z "$DOWNLOAD_FROM" ]; then
+  DOWNLOAD_FROM=http://packages.static.se7enapp.com/heroku-buildpack-wordpress
 fi
 
 # END CONFIG
 
 #
-NGINX_URL="https://s3.amazonaws.com/${S3_BUCKET}/nginx-${NGINX_VERSION}-heroku.tar.gz"
-PHP_URL="https://s3.amazonaws.com/${S3_BUCKET}/php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
+NGINX_URL="${DOWNLOAD_FROM}/nginx-${NGINX_VERSION}-heroku.tar.gz"
+PHP_URL="${DOWNLOAD_FROM}/php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
 WORDPRESS_URL="http://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"
 #
 
