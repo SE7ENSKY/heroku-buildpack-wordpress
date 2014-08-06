@@ -3,7 +3,7 @@
 set -e
 
 if [ "$NGINX_VERSION" == "" ]; then
-  echo "must set NGINX_VERSION, i.e NGINX_VERSION=1.7.3"
+  echo "must set NGINX_VERSION, i.e NGINX_VERSION=1.7.4"
   exit 1
 fi
 
